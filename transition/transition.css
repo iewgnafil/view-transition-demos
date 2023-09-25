@@ -30,12 +30,12 @@
 }
 
 .d {
-    transition: all 0.5s;
+    transition: all 1s;
 }
 
 .b {
-    transition: background-color 0.5s;
+    transition: background-color 1s;
 }
 .c {
-    transition: width 0.5s, height 0.5s;
+    transition: width 1s, height 1s;
 }
