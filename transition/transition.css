@@ -1,0 +1,41 @@
+.container {
+    margin: 100px auto;
+    width: 450px;
+    height: 450px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+.item {
+    width: 200px;
+    height: 200px;
+    color: #000;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content {
+    width: 150px;
+    height: 150px;
+    border-radius: 10%;
+    background-color: #005CFF;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.content:hover {
+    background-color: #ff5000;
+    width: 200px;
+    height: 200px;
+}
+
+.d {
+    transition: all 0.5s;
+}
+
+.b {
+    transition: background-color 0.5s;
+}
+.c {
+    transition: width 0.5s, height 0.5s;
+}
