@@ -1,9 +1,0 @@
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 5s;
-}
-
-/* 或者 */
-::view-transition-group(root) {
-    animation-duration: 5s;
-}
