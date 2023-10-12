@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+    <link rel="stylesheet" href="styles/main.css" />
+
+    <title>View Transitions API Example | ICS</title>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3.2.27/dist/vue.esm-browser.prod.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import { createApp, ref, nextTick } from "vue";
+      const componentThumb = {
+        props: ["content"],
+        emits: ["select"],
+        template: `<li>
+            <div class="photo-link">
+              <img class="photo-thumb"
+                   v-bind:src="'images/photo_' + content + '.webp'"
+                   v-bind:style="'view-transition-name: content-'+ content"
+                   width="640" height="360" alt="" />
+              <div class="photo-meta">
+                <p class="i-title">格里菲斯天文台的景色</p>
+                <div>
+                  <button class="btn button-open" v-on:click="$emit('open')">打开详情</button>
+                </div>
+              </div>
+            </div>
+          </li>`,
+      };
+
+      const componentDetail = {
+        props: ["content"],
+        emits: ["open"],
+        template: `<div class="view-detail" >
+          <div class="detail-action">
+            <button class="btn button-close" v-on:click="$emit('back')">返回列表</button>
+          </div>
+          <div class="detail-layout">
+            <div>
+              <img class="photo-detail"
+                   v-bind:src="'images/photo_' + content + '.webp'"
+                   v-bind:style="'view-transition-name: content-'+ content"
+                   width="640" height="360" alt="" />
+            </div>
+            <div class="photo-details">
+              <p class="i-title">格里菲斯天文台的景色</p>
+              <p class="i-sub">洛杉矶</p>
+              <p class="i-desc">
+                格里菲斯天文台是位于洛杉矶格里菲斯公园的一座天文台。 它拥有装饰艺术风格的外观，可欣赏到城市（包括市中心）的全景。<br>
+2006年，历时四年的大规模改造工程完成，增设展览馆、剧院、咖啡厅。[1] 此外，这里还被用作电影《无因的反叛》的拍摄地，并竖立了电影主演詹姆斯·迪恩的铜像，以表彰他对提升天文台形象的贡献。
+              </p>
+            </div>
+          </div>
+        </div>`,
+      };
+
+      const app = createApp({
+        setup() {
+          // 指示当前显示的状态
+          const currentContent = ref(null);
+
+          // 画面转换功能
+          const goPage = (content) => {
+            // View Transitions API 执行转换
+            document.startViewTransition(async () => {
+              currentContent.value = content;
+              await nextTick();
+            });
+          };
+          return { currentContent, goPage };
+        },
+        components: {
+          componentThumb,
+          componentDetail,
+        },
+      });
+      app.mount("#app");
+    </script>
+    <style>
+      .photo-thumb,
+      .photo-detail {
+        contain: paint;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app">
+      <div v-if="currentContent === null">
+        <h1>Pickup Pictures</h1>
+        <ul class="photo-list">
+          <component-thumb content="1" v-on:open="goPage('1')"></component-thumb>
+          <component-thumb content="2" v-on:open="goPage('2')"></component-thumb>
+        </ul>
+      </div>
+
+      <component-detail v-if="currentContent === '1'" content="1" v-on:back="goPage(null)"></component-detail>
+      <component-detail v-if="currentContent === '2'" content="2" v-on:back="goPage(null)"></component-detail>
+    </main>
+  </body>
+</html>
