@@ -17,7 +17,6 @@
 }
 h1 {
   font-size: 1.25rem;
-  padding-left: 32px;
   color: black;
 }
 </style>

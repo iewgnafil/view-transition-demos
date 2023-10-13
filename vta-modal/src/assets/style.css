@@ -25,27 +25,27 @@
 
 ::view-transition-old(card),
 ::view-transition-new(card) {
-  /* Prevent the default animation,
-so both views remain opacity:1 throughout the transition */
+  /* 阻止默认动画，
+  * 所以两个视图在整个转换过程中都保持不透明：1 */
   animation: none;
-  /* Use normal blending,
-  so the new view sits on top and obscures the old view */
+  /* 使用正常混合，
+  * 所以新视图位于顶部并遮挡旧视图 */
   mix-blend-mode: normal;
-  /* Make the height the same as the group,
-  meaning the view size might not match its aspect-ratio. */
+  /* 使高度与组相同，
+  * 这意味着视图大小可能与其纵横比不匹配。 */
   height: 100%;
-  /* Clip any overflow of the view */
+  /* 裁剪视图的任何溢出 */
   overflow: clip;
 
   border-radius: 16px;
 }
 
-/* The old view is the thumbnail */
+/* 旧视图是缩略图 */
 ::view-transition-old(card) {
   object-fit: contain;
 }
 
-/* The new view is the full image */
+/* 新视图是完整图像 */
 ::view-transition-new(card) {
   object-fit: cover;
 }
@@ -62,12 +62,11 @@ so both views remain opacity:1 throughout the transition */
 ::view-transition-image-pair(card-img) {
   isolation: none;
 }
-/* The old view is the thumbnail */
+
 ::view-transition-old(card-img) {
   object-fit: contain;
 }
 
-/* The new view is the full image */
 ::view-transition-new(card-img) {
   object-fit: cover;
 }

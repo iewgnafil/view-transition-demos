@@ -42,11 +42,12 @@ const emits = defineEmits<{ (e: "close"): void }>();
 .modal-dialog {
   max-width: 960px;
   margin-top: 64px;
-  height: calc(100% - 64px);
+  /* height: calc(100% - 64px); */
   position: relative;
   view-transition-name: card;
   background-color: white;
-  border-radius: 16px 16px 0 0;
+  /* border-radius: 16px 16px 0 0; */
+  border-radius: 16px 16px 16px 16px;
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
   overflow: hidden; /* 本当はちゃんと対策してね */
 }

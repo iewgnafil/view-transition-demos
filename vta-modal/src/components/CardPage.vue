@@ -70,6 +70,7 @@ const closeDialog = () => {
       <template v-for="(item, index) in items">
         <div
           class="row"
+          :key="index"
           v-if="index % 2 === 0"
           :class="{
             _left: (index / 2) % 2 === 0,
